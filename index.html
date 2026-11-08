@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Support the Channel</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(145deg,#0b1220,#17243a);color:#f8fafc;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{width:min(100%,480px);padding:32px 24px;border:1px solid #334155;border-radius:22px;background:#111c2e;box-shadow:0 20px 60px #0006;text-align:center}
+.heart{font-size:38px}h1{margin:12px 0;font-size:28px}p{color:#cbd5e1;line-height:1.65}
+.network{display:inline-block;margin:12px 0;padding:8px 14px;border-radius:999px;background:#153d36;color:#86efac;font-weight:700;font-size:14px}
+.address{margin:18px 0;padding:15px 12px;border:1px solid #475569;border-radius:12px;background:#0b1220;overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:14px;line-height:1.6;user-select:all}
+button{width:100%;padding:15px;border:0;border-radius:12px;background:#22c55e;color:#052e16;font-size:16px;font-weight:800;cursor:pointer}
+button:active{transform:scale(.99)}.note{font-size:13px;color:#fbbf24;margin-top:18px}
+#status{min-height:22px;color:#86efac;font-size:14px;margin-top:12px}
+</style>
+</head>
+<body>
+<main>
+<div class="heart">💚</div>
+<h1>Support the Channel</h1>
+<p>If you enjoy the content and would like to support the channel, you can send a donation using the wallet address below. Thank you for your support!</p>
+<div class="network">USDT · TRON (TRC20)</div>
+<div class="address" id="wallet">TENUoUaDKaLi36VXYYDjFzBbpxM4EW5Q8H</div>
+<button id="copyBtn" type="button">Copy Wallet Address</button>
+<div id="status" role="status" aria-live="polite"></div>
+<p class="note">Important: Send USDT only on the TRC20 network. Do not use another network.</p>
+</main>
+<script>
+const address = "TENUoUaDKaLi36VXYYDjFzBbpxM4EW5Q8H";
+const status = document.getElementById("status");
+document.getElementById("copyBtn").addEventListener("click", async () => {
+ try {
+  if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(address);
+  else {
+   const field=document.createElement("textarea"); field.value=address;
+   field.style.position="fixed"; field.style.opacity="0"; document.body.appendChild(field);
+   field.select(); const copied=document.execCommand("copy"); field.remove();
+   if(!copied) throw new Error("Copy failed");
+  }
+  status.textContent="Wallet address copied!";
+ } catch(e) { status.textContent="Please press and hold the address to copy it."; }
+});
+</script>
+</body>
+</html>
